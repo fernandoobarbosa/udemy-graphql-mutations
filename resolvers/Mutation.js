@@ -26,5 +26,16 @@ module.exports = {
     usuarios.splice(indice, 1)
 
     return usuario
+  },
+  alterarUsuario (_, args) {
+    const usuario = usuarios.find((usuario) => usuario.id === args.id)
+    if (!usuario) throw new Error('Usuário não encontrado')
+
+    const indice = usuarios.indexOf(usuario)
+    usuarios[indice] = {
+      ...usuario,
+      ...args
+    }
+    return usuarios[indice]
   }
 }
